@@ -1,0 +1,307 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l8
+txna ApplicationArgs 0
+method "issueToken(string,string,string,string,address,address)void"
+==
+bnz main_l7
+txna ApplicationArgs 0
+method "setReserveContract(application)void"
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "transfer(uint64,address,asset,string)void"
+==
+bnz main_l5
+err
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+store 6
+txna ApplicationArgs 2
+store 7
+txna ApplicationArgs 3
+int 0
+getbyte
+store 8
+txna ApplicationArgs 4
+store 9
+load 6
+load 7
+load 8
+load 9
+callsub transfer_6
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+callsub setReserveContract_5
+int 1
+return
+main_l7:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 0
+txna ApplicationArgs 2
+store 1
+txna ApplicationArgs 3
+store 2
+txna ApplicationArgs 4
+store 3
+txna ApplicationArgs 5
+store 4
+txna ApplicationArgs 6
+store 5
+load 0
+load 1
+load 2
+load 3
+load 4
+load 5
+callsub issueToken_4
+int 1
+return
+main_l8:
+txn OnCompletion
+int NoOp
+==
+bnz main_l18
+txn OnCompletion
+int OptIn
+==
+bnz main_l17
+txn OnCompletion
+int CloseOut
+==
+bnz main_l16
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l15
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l14
+err
+main_l14:
+txn ApplicationID
+int 0
+!=
+assert
+callsub assertsenderiscreator_0
+int 1
+return
+main_l15:
+txn ApplicationID
+int 0
+!=
+assert
+callsub assertsenderiscreator_0
+int 1
+return
+main_l16:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l17:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l18:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// assert_sender_is_creator
+assertsenderiscreator_0:
+proto 0 0
+txn Sender
+global CreatorAddress
+==
+assert
+retsub
+
+// transferAlgo
+transferAlgo_1:
+proto 3 1
+itxn_begin
+int pay
+itxn_field TypeEnum
+frame_dig -3
+itxn_field Amount
+frame_dig -2
+itxn_field Receiver
+frame_dig -1
+extract 2 0
+itxn_field Note
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferASA
+transferASA_2:
+proto 4 1
+itxn_begin
+int axfer
+itxn_field TypeEnum
+frame_dig -4
+itxn_field AssetAmount
+frame_dig -3
+itxn_field AssetReceiver
+frame_dig -2
+txnas Assets
+itxn_field XferAsset
+frame_dig -1
+extract 2 0
+itxn_field Note
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// issueToken
+issueToken_3:
+proto 6 1
+itxn_begin
+int acfg
+itxn_field TypeEnum
+frame_dig -6
+extract 2 0
+itxn_field ConfigAssetName
+frame_dig -5
+extract 2 0
+itxn_field ConfigAssetUnitName
+int 6
+itxn_field ConfigAssetDecimals
+frame_dig -4
+extract 2 0
+itxn_field ConfigAssetURL
+frame_dig -3
+extract 2 0
+itxn_field ConfigAssetMetadataHash
+int 18446744073709000000
+itxn_field ConfigAssetTotal
+global CurrentApplicationAddress
+itxn_field ConfigAssetReserve
+frame_dig -2
+itxn_field ConfigAssetFreeze
+frame_dig -1
+itxn_field ConfigAssetClawback
+int 0
+itxn_field Fee
+itxn_submit
+frame_dig -6
+extract 2 0
+itxn CreatedAssetID
+app_global_put
+int 1
+return
+
+// issueToken
+issueToken_4:
+proto 6 0
+callsub assertsenderiscreator_0
+frame_dig -6
+frame_dig -5
+frame_dig -4
+frame_dig -3
+frame_dig -2
+frame_dig -1
+callsub issueToken_3
+assert
+int 1
+return
+
+// setReserveContract
+setReserveContract_5:
+proto 1 0
+callsub assertsenderiscreator_0
+frame_dig -1
+txnas Applications
+app_params_get AppAddress
+store 11
+store 10
+load 11
+assert
+byte "app_r"
+frame_dig -1
+txnas Applications
+app_global_put
+byte "addr_r"
+load 10
+app_global_put
+int 1
+return
+
+// transfer
+transfer_6:
+proto 4 0
+txn Sender
+global CreatorAddress
+==
+txn Sender
+byte "addr_r"
+app_global_get
+==
+||
+assert
+frame_dig -2
+txnas Assets
+int 0
+==
+bnz transfer_6_l2
+frame_dig -4
+frame_dig -3
+frame_dig -2
+frame_dig -1
+callsub transferASA_2
+assert
+b transfer_6_l3
+transfer_6_l2:
+frame_dig -4
+frame_dig -3
+frame_dig -1
+callsub transferAlgo_1
+assert
+transfer_6_l3:
+int 1
+return

@@ -1,0 +1,87 @@
+2023-02-06T17:19:25.080Z [info]: Mon Feb 06 2023 18:19:25 GMT+0100 (Central European Standard Time) App started
+2023-02-06T17:19:40.212Z [info]: Mon Feb 06 2023 18:19:40 GMT+0100 (Central European Standard Time) App started
+2023-02-06T17:19:40.257Z [info]: going to deploy reserve app
+2023-02-06T17:20:15.751Z [info]: Mon Feb 06 2023 18:20:15 GMT+0100 (Central European Standard Time) App started
+2023-02-06T17:20:15.800Z [info]: going to deploy reserve app
+2023-02-06T17:20:38.775Z [info]: Mon Feb 06 2023 18:20:38 GMT+0100 (Central European Standard Time) App started
+2023-02-06T17:20:38.816Z [info]: going to deploy reserve app
+2023-02-06T17:20:44.416Z [info]: Mon Feb 06 2023 18:20:44 GMT+0100 (Central European Standard Time) reserveAppId: 577
+2023-02-06T18:25:25.337Z [info]: Mon Feb 06 2023 19:25:25 GMT+0100 (Central European Standard Time) App started
+2023-02-06T18:25:25.380Z [info]: going to deploy reserve app
+2023-02-06T18:25:29.872Z [info]: Mon Feb 06 2023 19:25:29 GMT+0100 (Central European Standard Time) reserveAppId: 584
+2023-02-06T18:26:58.900Z [info]: Mon Feb 06 2023 19:26:58 GMT+0100 (Central European Standard Time) App started
+2023-02-06T18:26:58.942Z [info]: going to deploy reserve app
+2023-02-06T18:27:05.332Z [info]: Mon Feb 06 2023 19:27:05 GMT+0100 (Central European Standard Time) reserveAppId: 587
+2023-02-06T18:27:38.345Z [info]: Mon Feb 06 2023 19:27:38 GMT+0100 (Central European Standard Time) App started
+2023-02-06T18:27:38.391Z [info]: going to deploy reserve app
+2023-02-06T18:27:42.836Z [info]: Mon Feb 06 2023 19:27:42 GMT+0100 (Central European Standard Time) reserveAppId: 590
+2023-02-06T18:29:03.177Z [info]: Mon Feb 06 2023 19:29:03 GMT+0100 (Central European Standard Time) App started
+2023-02-06T18:29:03.220Z [info]: going to deploy reserve app
+2023-02-06T18:29:08.066Z [info]: Mon Feb 06 2023 19:29:08 GMT+0100 (Central European Standard Time) reserveAppId: 593
+2023-02-06T19:02:17.783Z [info]: Mon Feb 06 2023 20:02:17 GMT+0100 (Central European Standard Time) App started
+2023-02-06T19:02:17.825Z [info]: going to deploy reserve app
+2023-02-06T19:02:23.025Z [info]: Mon Feb 06 2023 20:02:23 GMT+0100 (Central European Standard Time) reserveAppId: 599
+2023-02-06T20:34:14.523Z [info]: Mon Feb 06 2023 21:34:14 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T20:34:26.161Z [info]: Mon Feb 06 2023 21:34:26 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T20:36:54.187Z [info]: Mon Feb 06 2023 21:36:54 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T20:39:58.518Z [info]: Mon Feb 06 2023 21:39:58 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T20:40:16.974Z [info]: Mon Feb 06 2023 21:40:16 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T20:48:28.590Z [info]: Mon Feb 06 2023 21:48:28 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:05:11.172Z [info]: Mon Feb 06 2023 22:05:11 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:05:11.218Z [info]: going to deploy tokens app
+2023-02-06T21:05:18.012Z [info]: Mon Feb 06 2023 22:05:18 GMT+0100 (Central European Standard Time) tokensAppId: 625
+2023-02-06T21:06:17.448Z [info]: Mon Feb 06 2023 22:06:17 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:06:17.491Z [info]: going to deploy tokens app
+2023-02-06T21:06:22.786Z [info]: Mon Feb 06 2023 22:06:22 GMT+0100 (Central European Standard Time) tokensAppId: 630
+2023-02-06T21:10:59.609Z [info]: Mon Feb 06 2023 22:10:59 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:10:59.648Z [info]: going to deploy tokens app
+2023-02-06T21:11:05.771Z [info]: Mon Feb 06 2023 22:11:05 GMT+0100 (Central European Standard Time) tokensAppId: 633
+2023-02-06T21:11:24.612Z [info]: Mon Feb 06 2023 22:11:24 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:11:24.655Z [info]: going to deploy tokens app
+2023-02-06T21:11:30.898Z [info]: Mon Feb 06 2023 22:11:30 GMT+0100 (Central European Standard Time) tokensAppId: 698
+2023-02-06T21:13:23.167Z [info]: Mon Feb 06 2023 22:13:23 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:13:23.185Z [info]: going to deploy tokens app
+2023-02-06T21:13:26.815Z [info]: Mon Feb 06 2023 22:13:26 GMT+0100 (Central European Standard Time) oracleECBAppId: 762
+2023-02-06T21:14:02.976Z [info]: Mon Feb 06 2023 22:14:02 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:14:02.995Z [info]: going to deploy tokens app
+2023-02-06T21:14:07.730Z [info]: Mon Feb 06 2023 22:14:07 GMT+0100 (Central European Standard Time) oracleECBAppId: 763
+2023-02-06T21:16:31.173Z [info]: Mon Feb 06 2023 22:16:31 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:16:31.194Z [info]: going to deploy tokens app
+2023-02-06T21:16:37.745Z [info]: Mon Feb 06 2023 22:16:37 GMT+0100 (Central European Standard Time) oracleECBAppId: 795
+2023-02-06T21:32:42.818Z [info]: Mon Feb 06 2023 22:32:42 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:32:42.836Z [info]: going to deploy tokens app
+2023-02-06T21:32:52.929Z [info]: Mon Feb 06 2023 22:32:52 GMT+0100 (Central European Standard Time) App started - deploy oracle
+2023-02-06T21:32:52.947Z [info]: going to deploy tokens app
+2023-02-06T21:32:56.419Z [info]: Mon Feb 06 2023 22:32:56 GMT+0100 (Central European Standard Time) oracleECBAppId: 829
+2023-02-06T21:43:50.672Z [info]: Mon Feb 06 2023 22:43:50 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:43:50.716Z [info]: going to deploy reserve app
+2023-02-06T21:43:55.023Z [info]: Mon Feb 06 2023 22:43:55 GMT+0100 (Central European Standard Time) reserveAppId: 863
+2023-02-06T21:46:07.585Z [info]: Mon Feb 06 2023 22:46:07 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:46:07.629Z [info]: going to deploy reserve app
+2023-02-06T21:46:11.403Z [info]: Mon Feb 06 2023 22:46:11 GMT+0100 (Central European Standard Time) reserveAppId: 866
+2023-02-06T21:52:04.421Z [info]: Mon Feb 06 2023 22:52:04 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:52:04.463Z [info]: going to deploy reserve app
+2023-02-06T21:52:09.404Z [info]: Mon Feb 06 2023 22:52:09 GMT+0100 (Central European Standard Time) reserveAppId: 870
+2023-02-06T21:59:31.479Z [info]: Mon Feb 06 2023 22:59:31 GMT+0100 (Central European Standard Time) App started
+2023-02-06T21:59:31.522Z [info]: going to deploy reserve app
+2023-02-06T21:59:46.818Z [info]: Mon Feb 06 2023 22:59:46 GMT+0100 (Central European Standard Time) reserveAppId: 875
+2023-02-06T22:01:23.434Z [info]: Mon Feb 06 2023 23:01:23 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:01:23.474Z [info]: going to deploy reserve app
+2023-02-06T22:01:29.104Z [info]: Mon Feb 06 2023 23:01:29 GMT+0100 (Central European Standard Time) reserveAppId: 880
+2023-02-06T22:12:51.346Z [info]: Mon Feb 06 2023 23:12:51 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:12:51.388Z [info]: going to deploy reserve app
+2023-02-06T22:12:56.100Z [info]: Mon Feb 06 2023 23:12:56 GMT+0100 (Central European Standard Time) reserveAppId: 889
+2023-02-06T22:42:37.352Z [info]: Mon Feb 06 2023 23:42:37 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:42:37.392Z [info]: going to deploy reserve app
+2023-02-06T22:42:41.307Z [info]: Mon Feb 06 2023 23:42:41 GMT+0100 (Central European Standard Time) reserveAppId: 901
+2023-02-06T22:45:07.622Z [info]: Mon Feb 06 2023 23:45:07 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:45:07.663Z [info]: going to deploy reserve app
+2023-02-06T22:45:11.876Z [info]: Mon Feb 06 2023 23:45:11 GMT+0100 (Central European Standard Time) reserveAppId: 911
+2023-02-06T22:46:55.206Z [info]: Mon Feb 06 2023 23:46:55 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:47:08.973Z [info]: Mon Feb 06 2023 23:47:08 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:48:34.331Z [info]: Mon Feb 06 2023 23:48:34 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:48:34.373Z [info]: going to deploy reserve app
+2023-02-06T22:48:40.938Z [info]: Mon Feb 06 2023 23:48:40 GMT+0100 (Central European Standard Time) reserveAppId: 933
+2023-02-06T22:55:50.779Z [info]: Mon Feb 06 2023 23:55:50 GMT+0100 (Central European Standard Time) App started
+2023-02-06T22:55:50.822Z [info]: going to deploy reserve app
+2023-02-06T22:55:57.337Z [info]: Mon Feb 06 2023 23:55:57 GMT+0100 (Central European Standard Time) reserveAppId: 944

@@ -1,0 +1,1001 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l12
+txna ApplicationArgs 0
+method "configureVariables(account,address,application,asset,uint64,uint64,uint64,uint64,uint64,uint64)void"
+==
+bnz main_l11
+txna ApplicationArgs 0
+method "configureOracles(application,uint64,application,uint64,application,uint64,asset)void"
+==
+bnz main_l10
+txna ApplicationArgs 0
+method "mintStToken(txn,account,application,application,application,application,asset,asset,uint64,uint64)void"
+==
+bnz main_l9
+txna ApplicationArgs 0
+method "burnStToken(txn,account,application,application,application,asset,asset,uint64,uint64)void"
+==
+bnz main_l8
+txna ApplicationArgs 0
+method "transfer(uint64,account,address,asset,string)void"
+==
+bnz main_l7
+err
+main_l7:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+store 34
+txna ApplicationArgs 2
+int 0
+getbyte
+store 35
+txna ApplicationArgs 3
+store 36
+txna ApplicationArgs 4
+int 0
+getbyte
+store 37
+txna ApplicationArgs 5
+store 38
+load 34
+load 35
+load 36
+load 37
+load 38
+callsub transfer_21
+int 1
+return
+main_l8:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+store 26
+txna ApplicationArgs 2
+int 0
+getbyte
+store 27
+txna ApplicationArgs 3
+int 0
+getbyte
+store 28
+txna ApplicationArgs 4
+int 0
+getbyte
+store 29
+txna ApplicationArgs 5
+int 0
+getbyte
+store 30
+txna ApplicationArgs 6
+int 0
+getbyte
+store 31
+txna ApplicationArgs 7
+btoi
+store 32
+txna ApplicationArgs 8
+btoi
+store 33
+txn GroupIndex
+int 1
+-
+load 26
+load 27
+load 28
+load 29
+load 30
+load 31
+load 32
+load 33
+callsub burnStToken_20
+int 1
+return
+main_l9:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+store 17
+txna ApplicationArgs 2
+int 0
+getbyte
+store 18
+txna ApplicationArgs 3
+int 0
+getbyte
+store 19
+txna ApplicationArgs 4
+int 0
+getbyte
+store 20
+txna ApplicationArgs 5
+int 0
+getbyte
+store 21
+txna ApplicationArgs 6
+int 0
+getbyte
+store 22
+txna ApplicationArgs 7
+int 0
+getbyte
+store 23
+txna ApplicationArgs 8
+btoi
+store 24
+txna ApplicationArgs 9
+btoi
+store 25
+txn GroupIndex
+int 1
+-
+load 17
+load 18
+load 19
+load 20
+load 21
+load 22
+load 23
+load 24
+load 25
+callsub mintStToken_19
+int 1
+return
+main_l10:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+store 10
+txna ApplicationArgs 2
+btoi
+store 11
+txna ApplicationArgs 3
+int 0
+getbyte
+store 12
+txna ApplicationArgs 4
+btoi
+store 13
+txna ApplicationArgs 5
+int 0
+getbyte
+store 14
+txna ApplicationArgs 6
+btoi
+store 15
+txna ApplicationArgs 7
+int 0
+getbyte
+store 16
+load 10
+load 11
+load 12
+load 13
+load 14
+load 15
+load 16
+callsub configureOracles_18
+int 1
+return
+main_l11:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+store 0
+txna ApplicationArgs 2
+store 1
+txna ApplicationArgs 3
+int 0
+getbyte
+store 2
+txna ApplicationArgs 4
+int 0
+getbyte
+store 3
+txna ApplicationArgs 5
+btoi
+store 4
+txna ApplicationArgs 6
+btoi
+store 5
+txna ApplicationArgs 7
+btoi
+store 6
+txna ApplicationArgs 8
+btoi
+store 7
+txna ApplicationArgs 9
+btoi
+store 8
+txna ApplicationArgs 10
+btoi
+store 9
+load 0
+load 1
+load 2
+load 3
+load 4
+load 5
+load 6
+load 7
+load 8
+load 9
+callsub configureVariables_17
+int 1
+return
+main_l12:
+txn OnCompletion
+int NoOp
+==
+bnz main_l22
+txn OnCompletion
+int OptIn
+==
+bnz main_l21
+txn OnCompletion
+int CloseOut
+==
+bnz main_l20
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l19
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l18
+err
+main_l18:
+txn ApplicationID
+int 0
+!=
+assert
+callsub assertsenderiscreator_0
+int 1
+return
+main_l19:
+txn ApplicationID
+int 0
+!=
+assert
+callsub assertsenderiscreator_0
+int 1
+return
+main_l20:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l21:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l22:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// assert_sender_is_creator
+assertsenderiscreator_0:
+proto 0 0
+txn Sender
+global CreatorAddress
+==
+assert
+retsub
+
+// protocolFee
+protocolFee_1:
+proto 1 1
+byte "pf"
+app_global_get
+frame_dig -1
+*
+int 10000
+/
+retsub
+
+// lpFee
+lpFee_2:
+proto 1 1
+int 0
+frame_dig -1
+frame_dig -1
+callsub protocolFee_1
+-
+frame_bury 0
+byte "lpf"
+app_global_get
+frame_dig 0
+*
+int 10000
+/
+frame_bury 0
+retsub
+
+// exitFee
+exitFee_3:
+proto 1 1
+int 0
+frame_dig -1
+frame_dig -1
+callsub protocolFee_1
+-
+frame_dig -1
+callsub lpFee_2
+-
+frame_bury 0
+byte "ef"
+app_global_get
+frame_dig 0
+*
+int 10000
+/
+frame_bury 0
+retsub
+
+// reserveBalanceAfterFees
+reserveBalanceAfterFees_4:
+proto 1 1
+frame_dig -1
+frame_dig -1
+callsub protocolFee_1
+-
+frame_dig -1
+callsub lpFee_2
+-
+frame_dig -1
+callsub exitFee_3
+-
+retsub
+
+// getOraclePrice
+getOraclePrice_5:
+proto 2 1
+frame_dig -2
+txnas Applications
+frame_dig -1
+txnas Assets
+itob
+app_global_get_ex
+store 40
+store 39
+load 40
+assert
+load 39
+extract 0 8
+btoi
+retsub
+
+// weightedOraclePrice
+weightedOraclePrice_6:
+proto 4 1
+frame_dig -3
+frame_dig -4
+callsub getOraclePrice_5
+byte "o1w"
+app_global_get
+*
+int 10000
+/
+frame_dig -2
+frame_dig -4
+callsub getOraclePrice_5
+byte "o2w"
+app_global_get
+*
+int 10000
+/
++
+frame_dig -1
+frame_dig -4
+callsub getOraclePrice_5
+byte "o3w"
+app_global_get
+*
+int 10000
+/
++
+retsub
+
+// amountToMint
+amountToMint_7:
+proto 5 1
+int 0
+dupn 3
+frame_dig -4
+callsub protocolFee_1
+frame_bury 0
+frame_dig -4
+callsub lpFee_2
+frame_bury 1
+frame_dig -4
+frame_dig 0
+-
+frame_dig 1
+-
+frame_bury 2
+frame_dig 2
+frame_dig -5
+frame_dig -3
+frame_dig -2
+frame_dig -1
+callsub weightedOraclePrice_6
+*
+int 10000000
+/
+frame_bury 3
+frame_dig 3
+frame_bury 0
+retsub
+
+// stableFromDepositOfStToken
+stableFromDepositOfStToken_8:
+proto 5 1
+frame_dig -4
+int 10000000
+*
+frame_dig -5
+frame_dig -3
+frame_dig -2
+frame_dig -1
+callsub weightedOraclePrice_6
+/
+retsub
+
+// transferProtocolFeeToFeeAccount
+transferProtocolFeeToFeeAccount_9:
+proto 3 1
+int 0
+frame_dig -1
+callsub protocolFee_1
+frame_bury 0
+itxn_begin
+int axfer
+itxn_field TypeEnum
+frame_dig -2
+txnas Assets
+itxn_field XferAsset
+frame_dig 0
+itxn_field AssetAmount
+frame_dig -3
+txnas Accounts
+itxn_field AssetReceiver
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferExitFeeToFeeAccount
+transferExitFeeToFeeAccount_10:
+proto 2 1
+int 0
+frame_dig -1
+callsub exitFee_3
+frame_bury 0
+itxn_begin
+int axfer
+itxn_field TypeEnum
+frame_dig -2
+txnas Assets
+itxn_field XferAsset
+frame_dig 0
+itxn_field AssetAmount
+byte "af"
+app_global_get
+itxn_field AssetReceiver
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferFromTokensContractToAddress
+transferFromTokensContractToAddress_11:
+proto 4 1
+byte ""
+byte ""
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+itxn_begin
+int appl
+itxn_field TypeEnum
+frame_dig -4
+txnas Applications
+itxn_field ApplicationID
+frame_dig -3
+itxn_field Accounts
+frame_dig -2
+txnas Assets
+itxn_field Assets
+method "transfer(uint64,account,asset,string)void"
+itxn_field ApplicationArgs
+frame_dig -1
+itob
+itxn_field ApplicationArgs
+byte 0x01
+itxn_field ApplicationArgs
+byte 0x00
+itxn_field ApplicationArgs
+frame_dig 0
+extract 2 0
+itxn_field ApplicationArgs
+int 0
+itxn_field Fee
+global CurrentApplicationAddress
+itxn_field Sender
+itxn_submit
+int 1
+return
+
+// transferStTokenToClient
+transferStTokenToClient_12:
+proto 7 1
+byte ""
+int 0
+frame_dig -5
+frame_dig -6
+frame_dig -4
+frame_dig -3
+frame_dig -2
+callsub amountToMint_7
+frame_bury 1
+frame_dig -1
+frame_dig 1
+<=
+assert
+txn Sender
+frame_bury 0
+frame_dig 0
+len
+int 32
+==
+assert
+frame_dig -7
+frame_dig 0
+frame_dig -5
+frame_dig 1
+callsub transferFromTokensContractToAddress_11
+assert
+int 1
+return
+
+// transferASABase
+transferASABase_13:
+proto 4 0
+itxn_begin
+int axfer
+itxn_field TypeEnum
+frame_dig -4
+itxn_field AssetAmount
+frame_dig -3
+itxn_field AssetReceiver
+frame_dig -2
+txnas Assets
+itxn_field XferAsset
+frame_dig -1
+extract 2 0
+itxn_field Note
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferASA
+transferASA_14:
+proto 5 0
+itxn_begin
+int axfer
+itxn_field TypeEnum
+frame_dig -4
+txnas Accounts
+itxn_field Sender
+frame_dig -5
+itxn_field AssetAmount
+frame_dig -3
+itxn_field AssetReceiver
+frame_dig -2
+txnas Assets
+itxn_field XferAsset
+frame_dig -1
+extract 2 0
+itxn_field Note
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferAlgo
+transferAlgo_15:
+proto 4 0
+itxn_begin
+int pay
+itxn_field TypeEnum
+frame_dig -3
+txnas Accounts
+itxn_field Sender
+frame_dig -4
+itxn_field Amount
+frame_dig -2
+itxn_field Receiver
+frame_dig -1
+extract 2 0
+itxn_field Note
+int 0
+itxn_field Fee
+itxn_submit
+int 1
+return
+
+// transferReserveToUser
+transferReserveToUser_16:
+proto 3 1
+int 0
+byte ""
+dup
+frame_dig -2
+callsub reserveBalanceAfterFees_4
+frame_bury 0
+byte ""
+frame_bury 1
+frame_dig 1
+len
+itob
+extract 6 0
+frame_dig 1
+concat
+frame_bury 1
+frame_dig 0
+frame_dig -1
+>=
+assert
+txn Sender
+frame_bury 2
+frame_dig 2
+len
+int 32
+==
+assert
+frame_dig 0
+frame_dig 2
+frame_dig -3
+frame_dig 1
+callsub transferASABase_13
+int 1
+return
+
+// configureVariables
+configureVariables_17:
+proto 10 0
+int 0
+byte ""
+dupn 2
+callsub assertsenderiscreator_0
+byte "pf"
+frame_dig -6
+app_global_put
+byte "lpf"
+frame_dig -5
+app_global_put
+byte "nf"
+frame_dig -4
+app_global_put
+byte "ef"
+frame_dig -3
+app_global_put
+byte "spt"
+frame_dig -2
+app_global_put
+byte "spl"
+frame_dig -1
+app_global_put
+byte "af"
+frame_dig -10
+txnas Accounts
+app_global_put
+byte "ata"
+frame_dig -9
+app_global_put
+byte "at"
+frame_dig -8
+txnas Applications
+app_global_put
+int 0
+frame_bury 0
+byte ""
+frame_bury 1
+frame_dig 1
+len
+itob
+extract 6 0
+frame_dig 1
+concat
+frame_bury 1
+frame_dig -10
+txnas Accounts
+frame_bury 2
+frame_dig 2
+len
+int 32
+==
+assert
+global CurrentApplicationAddress
+frame_bury 3
+frame_dig 3
+len
+int 32
+==
+assert
+frame_dig 0
+frame_dig 3
+frame_dig -7
+frame_dig 1
+callsub transferASABase_13
+frame_dig 0
+frame_dig -10
+frame_dig 2
+frame_dig -7
+frame_dig 1
+callsub transferASA_14
+int 1
+return
+
+// configureOracles
+configureOracles_18:
+proto 7 0
+callsub assertsenderiscreator_0
+frame_dig -6
+frame_dig -4
++
+frame_dig -2
++
+int 10000
+==
+assert
+byte "o1"
+frame_dig -7
+txnas Applications
+app_global_put
+byte "o2"
+frame_dig -5
+txnas Applications
+app_global_put
+byte "o3"
+frame_dig -3
+txnas Applications
+app_global_put
+byte "o1w"
+frame_dig -6
+app_global_put
+byte "o2w"
+frame_dig -4
+app_global_put
+byte "o3w"
+frame_dig -2
+app_global_put
+byte "ot"
+frame_dig -1
+txnas Assets
+app_global_put
+int 1
+return
+
+// mintStToken
+mintStToken_19:
+proto 10 0
+frame_dig -10
+gtxns XferAsset
+frame_dig -4
+txnas Assets
+==
+assert
+frame_dig -10
+gtxns AssetReceiver
+global CurrentApplicationAddress
+==
+assert
+byte "af"
+app_global_get
+frame_dig -9
+txnas Accounts
+==
+assert
+byte "o1"
+app_global_get
+frame_dig -8
+txnas Applications
+==
+assert
+byte "o2"
+app_global_get
+frame_dig -7
+txnas Applications
+==
+assert
+byte "o3"
+app_global_get
+frame_dig -6
+txnas Applications
+==
+assert
+byte "at"
+app_global_get
+frame_dig -5
+txnas Applications
+==
+assert
+byte "ot"
+app_global_get
+frame_dig -4
+txnas Assets
+==
+assert
+frame_dig -2
+frame_dig -10
+gtxns AssetAmount
+==
+assert
+frame_dig -9
+frame_dig -4
+frame_dig -2
+callsub transferProtocolFeeToFeeAccount_9
+assert
+frame_dig -5
+frame_dig -2
+frame_dig -3
+frame_dig -8
+frame_dig -7
+frame_dig -6
+frame_dig -1
+callsub transferStTokenToClient_12
+assert
+int 1
+return
+
+// burnStToken
+burnStToken_20:
+proto 9 0
+int 0
+frame_dig -2
+frame_dig -9
+gtxns AssetAmount
+==
+assert
+frame_dig -9
+gtxns AssetReceiver
+byte "ata"
+app_global_get
+==
+assert
+frame_dig -4
+txnas Assets
+frame_dig -9
+gtxns XferAsset
+==
+assert
+frame_dig -3
+txnas Assets
+byte "ot"
+app_global_get
+==
+assert
+frame_dig -4
+frame_dig -2
+frame_dig -7
+frame_dig -6
+frame_dig -5
+callsub stableFromDepositOfStToken_8
+frame_bury 0
+frame_dig -8
+frame_dig -3
+frame_dig 0
+callsub transferProtocolFeeToFeeAccount_9
+assert
+frame_dig -3
+frame_dig 0
+callsub transferExitFeeToFeeAccount_10
+assert
+frame_dig -3
+frame_dig 0
+frame_dig -1
+callsub transferReserveToUser_16
+assert
+int 1
+return
+
+// transfer
+transfer_21:
+proto 5 0
+callsub assertsenderiscreator_0
+frame_dig -4
+txnas Accounts
+byte "alpf"
+app_global_get
+==
+frame_dig -4
+txnas Accounts
+byte "af"
+app_global_get
+==
+||
+assert
+frame_dig -2
+txnas Assets
+int 0
+==
+bnz transfer_21_l2
+frame_dig -5
+frame_dig -4
+frame_dig -3
+frame_dig -2
+frame_dig -1
+callsub transferASA_14
+b transfer_21_l3
+transfer_21_l2:
+frame_dig -5
+frame_dig -4
+frame_dig -3
+frame_dig -1
+callsub transferAlgo_15
+transfer_21_l3:
+int 1
+return

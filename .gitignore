@@ -1,0 +1,12 @@
+node_modules
+artifacts
+cache
+.VSCodeCounter/
+*.code-workspace
+.env
+.env.test
+*.pyc
+orderAppIds.txt
+orderbook.png
+orderbook.dot
+.config/

@@ -1,0 +1,209 @@
+#pragma version 6
+intcblock 1 0 8 16
+// original: bytecblock 0xbc08e40826f158c086d30bac265537ea2041d2412f97c64e4802ed1b38727575 0x757064617465725f61646472
+bytecblock 0x0d42527e870f471dfe2e6c70f3b3831062aed355288edea2133bdf1ceca1e072 0x757064617465725f61646472 // BVBFE7UHB5DR37RONRYPHM4DCBRK5U2VFCHN5IQTHPPRZ3FB4BZGM5Y4OM updater_addr
+txn OnCompletion
+intc_1 // 0
+==
+bnz label1                    // OnCompletion must be always 0
+err
+label1:
+txn ApplicationID
+intc_1 // 0
+==
+bnz label2_onAppCreate
+txna ApplicationArgs 0
+pushbytes 0x75 // "u"
+==
+bnz label3_updateByUpdater
+txna ApplicationArgs 0
+pushbytes 0x73 // "s"
+==
+bnz label4_setUpdatorByHardcodedAddress
+txna ApplicationArgs 0
+pushbytes 0x61 // "a"
+==
+bnz label5_setGlobalStateByHardcodedAddress
+txna ApplicationArgs 0
+pushbytes 0x72 // "r"
+==
+bnz label6_deleteAppByHardcodedAddress
+err
+label6_deleteAppByHardcodedAddress:
+txn Sender
+bytec_0 // addr XQEOICBG6FMMBBWTBOWCMVJX5IQEDUSBF6L4MTSIALWRWODSOV2THX6GTU
+==
+assert
+txn CloseRemainderTo
+global ZeroAddress
+==
+assert
+txn RekeyTo
+global ZeroAddress
+==
+assert
+txn NumAppArgs
+pushint 2
+==
+assert
+global CurrentApplicationID
+txna ApplicationArgs 1
+app_global_get_ex
+store 5
+store 4
+load 5
+assert
+txna ApplicationArgs 1
+app_global_del
+intc_0 // 1
+b label7_finish
+label5_setGlobalStateByHardcodedAddress:
+txn Sender
+bytec_0 // addr XQEOICBG6FMMBBWTBOWCMVJX5IQEDUSBF6L4MTSIALWRWODSOV2THX6GTU
+==
+assert
+txn CloseRemainderTo
+global ZeroAddress
+==
+assert
+txn RekeyTo
+global ZeroAddress
+==
+assert
+txn NumAppArgs
+pushint 3
+==
+assert
+global CurrentApplicationID
+txna ApplicationArgs 1          // arg1 == key
+app_global_get_ex
+store 3                         // key exists in current app
+store 2                         // value
+load 3
+!
+assert                          // check if key does not exists yet
+txna ApplicationArgs 1
+txna ApplicationArgs 2          // arg2 == init value
+global LatestTimestamp
+itob
+concat
+app_global_put
+intc_0 // 1
+b label7_finish
+label4_setUpdatorByHardcodedAddress:
+txn Sender
+bytec_0 // addr XQEOICBG6FMMBBWTBOWCMVJX5IQEDUSBF6L4MTSIALWRWODSOV2THX6GTU
+==
+assert
+txn CloseRemainderTo
+global ZeroAddress
+==
+assert
+txn RekeyTo
+global ZeroAddress
+==
+assert
+callsub label8_setUpdatorAddress
+intc_0 // 1
+b label7_finish
+label3_updateByUpdater:
+txn Sender
+bytec_1 // "updater_addr"
+app_global_get
+==
+assert
+txn CloseRemainderTo
+global ZeroAddress
+==
+assert
+txn RekeyTo
+global ZeroAddress
+==
+assert
+txna ApplicationArgs 1
+len
+store 1                     // Data length
+intc_1 // 0
+store 0                     // index
+label11:                    // do while index < len
+load 0
+load 1
+<
+bnz label9
+intc_0 // 1
+b label7_finish
+label9:
+txna ApplicationArgs 1
+load 0                      // put index to stack
+load 0                      
+intc_2 // 8
++                           // put index+8 to stack
+substring3                  // put to stack substr(arg1, index, index+8)
+txna ApplicationArgs 1
+load 0
+intc_2 // 8
++
+load 0
+intc_3 // 16
++
+substring3                  // put to stack substr(arg1, index+8, index+16)
+callsub label10_storeData   // substr(arg1, index, index+8) = global key, substr(arg1, index+8, index+16) = value
+load 0
+intc_3 // 16
++
+store 0
+b label11
+label2_onAppCreate:
+callsub label8_setUpdatorAddress
+intc_0 // 1
+label7_finish:        // finish
+return
+label8_setUpdatorAddress:         // Updator must be delivered in accounts list when app is created. Number of accounts must be equal to 1.
+txn NumAccounts
+intc_0 // 1
+==
+assert
+bytec_1 // "updater_addr"
+txna Accounts 1
+app_global_put
+retsub
+label10_storeData:
+store 7
+store 6
+load 6
+app_global_get
+intc_1 // 0
+extract_uint64
+store 8
+load 7
+btoi
+store 9
+load 8
+load 9
+>=
+bnz label12
+load 9
+load 8
+-
+label14:
+pushint 1000
+*
+load 8
+/
+pushint 100
+<
+bz label13
+load 6
+load 7
+global LatestTimestamp
+itob
+concat
+app_global_put
+b label13
+label12:
+load 8
+load 9
+-
+b label14
+label13:
+retsub

@@ -1,0 +1,243 @@
+{
+    "name": "ImpernamentLossFP",
+    "methods": [
+        {
+            "name": "configureVariables",
+            "args": [
+                {
+                    "type": "account",
+                    "name": "addrFee"
+                },
+                {
+                    "type": "address",
+                    "name": "addrTokensApp"
+                },
+                {
+                    "type": "application",
+                    "name": "appTokens"
+                },
+                {
+                    "type": "asset",
+                    "name": "assetOracleBase"
+                },
+                {
+                    "type": "uint64",
+                    "name": "protocolFee",
+                    "desc": "Protocol fee in base 10000"
+                },
+                {
+                    "type": "uint64",
+                    "name": "lpFee",
+                    "desc": "Protocol LP fee in base 10000"
+                },
+                {
+                    "type": "uint64",
+                    "name": "negativeFee",
+                    "desc": "Protocol negative fee in base 10000"
+                },
+                {
+                    "type": "uint64",
+                    "name": "exitFee",
+                    "desc": "Protocol exit fee in base 10000"
+                },
+                {
+                    "type": "uint64",
+                    "name": "stopPriceTop",
+                    "desc": "Stop price top in base 10000"
+                },
+                {
+                    "type": "uint64",
+                    "name": "stopPriceLow",
+                    "desc": "Stop price low in base 10000"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "Stabilitas DAO can configure the base variables"
+        },
+        {
+            "name": "configureOracles",
+            "args": [
+                {
+                    "type": "application",
+                    "name": "o1",
+                    "desc": "Oracle 1 feed - ECB data"
+                },
+                {
+                    "type": "uint64",
+                    "name": "o1w",
+                    "desc": "Weight of oracle 1 o1w+o2w+o3w==10000"
+                },
+                {
+                    "type": "application",
+                    "name": "o2",
+                    "desc": "Oracle 2 feed - Time weighted VWAP from AMM 1W"
+                },
+                {
+                    "type": "uint64",
+                    "name": "o2w",
+                    "desc": "Weight of oracle 1 o1w+o2w+o3w==10000"
+                },
+                {
+                    "type": "application",
+                    "name": "o3",
+                    "desc": "Oracle 3 feed - Time weighted VWAP from AMM 1H"
+                },
+                {
+                    "type": "uint64",
+                    "name": "o3w",
+                    "desc": "Weight of oracle 1 o1w+o2w+o3w==10000"
+                },
+                {
+                    "type": "asset",
+                    "name": "assetOracleBase"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "Stabilitas DAO can configure the base variables"
+        },
+        {
+            "name": "mintStToken",
+            "args": [
+                {
+                    "type": "txn",
+                    "name": "depositToReserve",
+                    "desc": "The token deposit transaction of the stable token."
+                },
+                {
+                    "type": "account",
+                    "name": "addrFee"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleECB",
+                    "desc": "Oracle providing prices from central bank"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleAMM1W",
+                    "desc": "Oracle providing vwap prices timed weighted from AMM 1 week long"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleAMM1H",
+                    "desc": "Oracle providing vwap prices timed weighted from AMM 1 hour long"
+                },
+                {
+                    "type": "application",
+                    "name": "tokensApp"
+                },
+                {
+                    "type": "asset",
+                    "name": "depositAsset",
+                    "desc": "Reference to deposit asset"
+                },
+                {
+                    "type": "asset",
+                    "name": "claimAsset",
+                    "desc": "Reference to asset to receive"
+                },
+                {
+                    "type": "uint64",
+                    "name": "depositAmount",
+                    "desc": "The amount deposited to the reserve of stable token (USDc)"
+                },
+                {
+                    "type": "uint64",
+                    "name": "minimumToReceive",
+                    "desc": "Safeguard to protect the minimum amount received by minting"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "Deposit stable asset (USDc) and mint national currency asset on algorand."
+        },
+        {
+            "name": "burnStToken",
+            "args": [
+                {
+                    "type": "txn",
+                    "name": "depositToReserve",
+                    "desc": "The token deposit transaction of the stable token."
+                },
+                {
+                    "type": "account",
+                    "name": "addFee"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleECB",
+                    "desc": "Oracle providing prices from central bank"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleAMM1W",
+                    "desc": "Oracle providing vwap prices timed weighted from AMM 1 week long"
+                },
+                {
+                    "type": "application",
+                    "name": "oracleAMM1H",
+                    "desc": "Oracle providing vwap prices timed weighted from AMM 1 hour long"
+                },
+                {
+                    "type": "asset",
+                    "name": "stAsset",
+                    "desc": "Reference to deposit asset (stCHF)"
+                },
+                {
+                    "type": "asset",
+                    "name": "claimAsset",
+                    "desc": "Reference to asset to receive (USDc)"
+                },
+                {
+                    "type": "uint64",
+                    "name": "depositStTokenAmount",
+                    "desc": "The amount deposited back to the st reserve"
+                },
+                {
+                    "type": "uint64",
+                    "name": "minimumToReceive",
+                    "desc": "Safeguard to protect the minimum amount received by minting"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "Deposit st token asset (stEUR) and pay the stable (USDc) to sender."
+        },
+        {
+            "name": "transfer",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "amount"
+                },
+                {
+                    "type": "account",
+                    "name": "sender"
+                },
+                {
+                    "type": "address",
+                    "name": "receiver"
+                },
+                {
+                    "type": "asset",
+                    "name": "asset"
+                },
+                {
+                    "type": "string",
+                    "name": "note"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "Stabilitas DAO can transfer token from fees account"
+        }
+    ],
+    "networks": {}
+}

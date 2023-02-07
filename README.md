@@ -10,8 +10,8 @@ This project has been fully created and Proof of concept developed at greenhouse
 
 Project web lauched at: https://stabilitas.finance/
 
-Repos: https://github.com/scholtz/stabilitas-apps/
-Repos: https://github.com/scholtz/stabilitas-web/
+- [Smart contracts - Pyteal,Teal,Typescript](https://github.com/scholtz/stabilitas-apps/)
+- [Presentation web - Vue.JS](https://github.com/scholtz/stabilitas-web/)
 
 ## Description
 

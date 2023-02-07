@@ -39,7 +39,7 @@ const configureOraclesTx = (data: IParams): algosdk.Transaction => {
     assetOracleBase,
   } = data;
   const signer = async () => [];
-  console.log("configureOraclesTx", data);
+  //console.log("configureOraclesTx", data);
   const atc = new AtomicTransactionComposer();
   atc.addMethodCall({
     sender,

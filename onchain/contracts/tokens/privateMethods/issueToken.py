@@ -26,6 +26,6 @@ def issueToken(
       }),
       InnerTxnBuilder.Submit(),
       App.globalPut(name.get(), InnerTxn.created_asset_id()),
-      Approve(),
+      Return(Int(1))
     )
     

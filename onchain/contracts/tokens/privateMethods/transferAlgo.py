@@ -3,7 +3,7 @@ from pyteal import *
 @Subroutine(TealType.uint64)
 def transferAlgo(
     amount: abi.Uint64, 
-    receiver: abi.Address,
+    receiver: abi.Account,
     note: abi.String, 
 ) -> Expr:
     return Seq(
@@ -11,11 +11,11 @@ def transferAlgo(
       InnerTxnBuilder.SetFields({
         TxnField.type_enum: TxnType.Payment,
         TxnField.amount: amount.get(),
-        TxnField.receiver: receiver.get(),
+        TxnField.receiver: receiver.address(),
         TxnField.note: note.get(),
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1))
     )
     

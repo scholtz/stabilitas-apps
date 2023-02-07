@@ -73,7 +73,6 @@ def mintStToken(
         # minimumToReceive: abi.Uint64
 
         Assert(transfers.transferStTokenToClient(tokensApp,depositAmount,claimAsset,oracleECB,oracleAMM1W,oracleAMM1H,minimumToReceive)),
-
         Approve()
     )
 

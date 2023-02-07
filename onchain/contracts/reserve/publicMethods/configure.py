@@ -83,11 +83,10 @@ def configureVariables(
         # asset: abi.Asset, 
         # note: abi.String, 
         
-        transfers.transferASABase(zero,receiverApp,assetOracleBase,emptyStr),
-        transfers.transferASA(zero,addrFee,receiver,assetOracleBase,emptyStr), # opt in to usdc to receive fees
+        Assert(transfers.transferASABase(zero,receiverApp,assetOracleBase,emptyStr)),
+        Assert(transfers.transferASA(zero,addrFee,receiver,assetOracleBase,emptyStr)), # opt in to usdc to receive fees
         #transfers.transferASA(zero,addrLPFee,addrLPFee,assetOracleBase,emptyStr), # opt in to usdc to receive lp fees
         #transfers.transferASA(zero,addrLPFee,addrLPFee,assetAMMLP,emptyStr),# opt in to lp asset to receive lp position
-        Approve()
     )
 
 

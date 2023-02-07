@@ -70,5 +70,5 @@ def processAddLiquidity(
         TxnField.fee: Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve()
+      Return(Int(1))
     )

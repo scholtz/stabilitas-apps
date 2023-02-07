@@ -51,7 +51,7 @@ const configureVariablesTx = (data: IParams): algosdk.Transaction => {
     stopPriceLow,
   } = data;
   const signer = async () => [];
-  console.log("configureVariablesTx", data);
+  //console.log("configureVariablesTx", data);
   const addrTokensApp = algosdk.getApplicationAddress(appTokens);
   const atc = new AtomicTransactionComposer();
   atc.addMethodCall({
@@ -74,7 +74,7 @@ const configureVariablesTx = (data: IParams): algosdk.Transaction => {
       stopPriceTop,
       stopPriceLow,
     ],
-    suggestedParams: { ...params, flatFee: true, fee: 2000 },
+    suggestedParams: { ...params, flatFee: true, fee: 3000 },
   });
   const group = atc.buildGroup();
   const txs = group.map(({ txn }) => {

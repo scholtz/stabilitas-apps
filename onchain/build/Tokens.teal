@@ -12,7 +12,7 @@ method "setReserveContract(application)void"
 ==
 bnz main_l6
 txna ApplicationArgs 0
-method "transfer(uint64,address,asset,string)void"
+method "transfer(uint64,account,asset,string)void"
 ==
 bnz main_l5
 err
@@ -29,6 +29,8 @@ txna ApplicationArgs 1
 btoi
 store 6
 txna ApplicationArgs 2
+int 0
+getbyte
 store 7
 txna ApplicationArgs 3
 int 0
@@ -166,6 +168,7 @@ itxn_field TypeEnum
 frame_dig -3
 itxn_field Amount
 frame_dig -2
+txnas Accounts
 itxn_field Receiver
 frame_dig -1
 extract 2 0
@@ -174,7 +177,7 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+retsub
 
 // transferASA
 transferASA_2:
@@ -185,6 +188,7 @@ itxn_field TypeEnum
 frame_dig -4
 itxn_field AssetAmount
 frame_dig -3
+txnas Accounts
 itxn_field AssetReceiver
 frame_dig -2
 txnas Assets
@@ -196,7 +200,7 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+retsub
 
 // issueToken
 issueToken_3:
@@ -234,7 +238,7 @@ extract 2 0
 itxn CreatedAssetID
 app_global_put
 int 1
-return
+retsub
 
 // issueToken
 issueToken_4:

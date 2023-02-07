@@ -155,11 +155,15 @@ freeze=STABLEYQKRPOL4DQVSKTTN5APHQPA3WXEJU4M36C2E46BS34A2Q3TCGT4U
 ./run-deploy-tokens-contract.sh
 ```
 
+store tokensAppId to the env vars and reload env vars
+
 3. Deploy ECB oracle
 
 ```
 ./run-deploy-oracle.sh
 ```
+
+store oracleECBAppId to the env vars and reload env vars
 
 4. AMM oracle not implemented yet, but the structure is the same as ECB oracle, so please deploy oracle again for oracleAMMVWAP1W feed and oracleAMMVWAP1H
 
@@ -168,8 +172,12 @@ freeze=STABLEYQKRPOL4DQVSKTTN5APHQPA3WXEJU4M36C2E46BS34A2Q3TCGT4U
 ./run-deploy-oracle.sh
 ```
 
+store oracleECBAppId to the oracleAMMVWAP1W and oracleAMMVWAP1H env vars and reload env vars
+
 5. Deploy reserve contract
 
 ```
 ./run-deploy-reserve.sh
 ```
+
+store reserveAppId and addrFee env vars and reload env vars

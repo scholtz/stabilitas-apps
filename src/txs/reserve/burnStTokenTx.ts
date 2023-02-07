@@ -29,7 +29,7 @@ interface IParams {
     depositAmount: abi.Uint64, 
     minimumToReceive: abi.Uint64 
 */
-const mintStTokenTx = (data: IParams): algosdk.Transaction[] => {
+const burnStTokenTx = (data: IParams): algosdk.Transaction[] => {
   const {
     sender,
     params,
@@ -45,29 +45,37 @@ const mintStTokenTx = (data: IParams): algosdk.Transaction[] => {
     minimumToReceive,
   } = data;
   const signer = async () => [];
-  //console.log("mintStTokenTx", data);
+  //console.log("burnStTokenTx", data);
 
   const deposit = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
     amount: depositAmount,
     assetIndex: depositAsset,
     from: sender,
     suggestedParams: params,
-    to: algosdk.getApplicationAddress(reserveAppId),
+    to: algosdk.getApplicationAddress(tokensApp),
   });
 
+  // depositToReserve: abi.Transaction,
+  // addrFee: abi.Account,
+  // oracleECB: abi.Application,
+  // oracleAMM1W: abi.Application,
+  // oracleAMM1H: abi.Application,
+  // stAsset: abi.Asset,
+  // claimAsset: abi.Asset,
+  // depositStTokenAmount: abi.Uint64,
+  // minimumToReceive: abi.Uint64
   const atc = new AtomicTransactionComposer();
   atc.addMethodCall({
     sender,
     signer,
     appID: reserveAppId,
-    method: getMethodByName(ReserveABI.methods, "mintStToken"),
+    method: getMethodByName(ReserveABI.methods, "burnStToken"),
     methodArgs: [
       { txn: deposit, signer },
       addrFee,
       oracleECB,
       oracleAMM1W,
       oracleAMM1H,
-      tokensApp,
       depositAsset,
       claimAsset,
       depositAmount,
@@ -82,4 +90,4 @@ const mintStTokenTx = (data: IParams): algosdk.Transaction[] => {
   });
   return algosdk.assignGroupID(txs);
 };
-export default mintStTokenTx;
+export default burnStTokenTx;

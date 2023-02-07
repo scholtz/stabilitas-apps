@@ -51,7 +51,7 @@ def setReserveContract(
 @router.router.method
 def transfer(
     amount: abi.Uint64, 
-    receiver: abi.Address,
+    receiver: abi.Account,
     asset: abi.Asset, 
     note: abi.String, 
   ) -> Expr:

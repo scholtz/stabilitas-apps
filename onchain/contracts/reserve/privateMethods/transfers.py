@@ -21,11 +21,12 @@ def transferProtocolFeeToFeeAccount(
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1)),
     )
 
 @Subroutine(TealType.uint64)
 def transferExitFeeToFeeAccount(
+    addrFee: abi.Account,
     depositAsset: abi.Asset, 
     depositAmount: abi.Uint64, 
 ) -> Expr:
@@ -37,11 +38,11 @@ def transferExitFeeToFeeAccount(
         TxnField.type_enum: TxnType.AssetTransfer,
         TxnField.xfer_asset: depositAsset.asset_id(),
         TxnField.asset_amount: amount.get(),
-        TxnField.asset_receiver: App.globalGet(constants.c_global_address_protocol_fees_holder),
+        TxnField.asset_receiver: addrFee.address(),
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1))
     )
 
 @Subroutine(TealType.uint64)
@@ -75,7 +76,7 @@ def transferLPFeeAndIncreaseLiquidity(
       # amountB: abi.Uint64,
       # appAMM: abi.Application,
       Assert(addLiq.processAddLiquidity(lpHolderAccount,depositAsset,claimAsset,assetAMMLP,amount,amountStAsset,appAMM)),
-      Approve(),
+      Return(Int(1))
     )
 
 @Subroutine(TealType.uint64)
@@ -88,23 +89,43 @@ def transferFromTokensContractToAddress(
     note = abi.make(abi.String)
     return Seq(
       note.set(Bytes("")),
+      # InnerTxnBuilder.Begin(),
+      # InnerTxnBuilder.MethodCall(
+      #   app_id=tokensApp.application_id(),
+      #   method_signature="transfer(uint64,account,asset,string)void",
+      #   args=[
+      #       Itob(amount.get()),
+      #       receiver.get(),
+      #       asset.asset_id(),
+      #       note.get()
+      #   ],
+      #   extra_fields={
+      #     TxnField.fee: Int(0),
+      #     TxnField.sender: Global.current_application_address()
+      #   }
+      # ),
+      # InnerTxnBuilder.Submit(),
+
+
       InnerTxnBuilder.Begin(),
-      InnerTxnBuilder.MethodCall(
-        app_id=tokensApp.application_id(),
-        method_signature="transfer(uint64,account,asset,string)void",
-        args=[
-            Itob(amount.get()),
-            receiver.get(),
-            asset.asset_id(),
-            note.get()
+      InnerTxnBuilder.SetFields({
+        TxnField.type_enum: TxnType.ApplicationCall,
+        TxnField.application_id: tokensApp.application_id(), 
+        TxnField.application_args: [
+          Bytes("base16", "ff6f75ab"),                      # transfer(uint64,account,asset,string)void ff6f75abe21204eac13c57035cd8c465dc43105d25a8814f1fb387a7ca6777fe
+          Itob(amount.get()),     # amount
+          Bytes("base16", "01"),  # send to
+          Bytes("base16", "00"),  # asset
+          Bytes("base16", "0000") # note
         ],
-        extra_fields={
-          TxnField.fee: Int(0),
-          TxnField.sender: Global.current_application_address()
-        }
-      ),
+        TxnField.accounts: [ receiver.get() ],
+        TxnField.assets: [ asset.asset_id() ],
+        
+        TxnField.fee: Int(0),
+      }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+
+      Return(Int(1))
     )
     
 @Subroutine(TealType.uint64)
@@ -134,11 +155,11 @@ def transferStTokenToClient(
       # asset: abi.Asset, 
       # amount: abi.Uint64, 
       Assert(transferFromTokensContractToAddress(tokensApp,sender,claimAsset,amount)),
-      Approve(),
+      Return(Int(1))
     )
 
 
-@Subroutine(TealType.none)
+@Subroutine(TealType.uint64)
 def transferASABase(
     amount: abi.Uint64, 
     receiver: abi.Address,
@@ -156,10 +177,10 @@ def transferASABase(
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1))
     )
     
-@Subroutine(TealType.none)
+@Subroutine(TealType.uint64)
 def transferASA(
     amount: abi.Uint64, 
     sender: abi.Account,
@@ -179,10 +200,10 @@ def transferASA(
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1))
     )
     
-@Subroutine(TealType.none)
+@Subroutine(TealType.uint64)
 def transferAlgo(
     amount: abi.Uint64, 
     sender: abi.Account,
@@ -200,7 +221,7 @@ def transferAlgo(
         TxnField.fee : Int(0),
       }),
       InnerTxnBuilder.Submit(),
-      Approve(),
+      Return(Int(1))
     )
 
 @Subroutine(TealType.uint64)
@@ -223,6 +244,6 @@ def transferReserveToUser(
       # receiver: abi.Address,
       # asset: abi.Asset, 
       # note: abi.String, 
-      transferASABase(userBalance, receiver, claimAsset, note),
-      Approve(),
+      Assert(transferASABase(userBalance, receiver, claimAsset, note)),
+      Return(Int(1))
     )

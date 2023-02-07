@@ -515,7 +515,8 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+frame_bury 0
+retsub
 
 // transferExitFeeToFeeAccount
 transferExitFeeToFeeAccount_10:
@@ -539,7 +540,8 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+frame_bury 0
+retsub
 
 // transferFromTokensContractToAddress
 transferFromTokensContractToAddress_11:
@@ -560,12 +562,7 @@ itxn_field TypeEnum
 frame_dig -4
 txnas Applications
 itxn_field ApplicationID
-frame_dig -3
-itxn_field Accounts
-frame_dig -2
-txnas Assets
-itxn_field Assets
-method "transfer(uint64,account,asset,string)void"
+byte 0xff6f75ab
 itxn_field ApplicationArgs
 frame_dig -1
 itob
@@ -574,16 +571,19 @@ byte 0x01
 itxn_field ApplicationArgs
 byte 0x00
 itxn_field ApplicationArgs
-frame_dig 0
-extract 2 0
+byte 0x0000
 itxn_field ApplicationArgs
+frame_dig -3
+itxn_field Accounts
+frame_dig -2
+txnas Assets
+itxn_field Assets
 int 0
 itxn_field Fee
-global CurrentApplicationAddress
-itxn_field Sender
 itxn_submit
 int 1
-return
+frame_bury 0
+retsub
 
 // transferStTokenToClient
 transferStTokenToClient_12:
@@ -615,11 +615,12 @@ frame_dig 1
 callsub transferFromTokensContractToAddress_11
 assert
 int 1
-return
+frame_bury 0
+retsub
 
 // transferASABase
 transferASABase_13:
-proto 4 0
+proto 4 1
 itxn_begin
 int axfer
 itxn_field TypeEnum
@@ -637,11 +638,11 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+retsub
 
 // transferASA
 transferASA_14:
-proto 5 0
+proto 5 1
 itxn_begin
 int axfer
 itxn_field TypeEnum
@@ -662,11 +663,11 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+retsub
 
 // transferAlgo
 transferAlgo_15:
-proto 4 0
+proto 4 1
 itxn_begin
 int pay
 itxn_field TypeEnum
@@ -684,7 +685,7 @@ int 0
 itxn_field Fee
 itxn_submit
 int 1
-return
+retsub
 
 // transferReserveToUser
 transferReserveToUser_16:
@@ -720,8 +721,10 @@ frame_dig 2
 frame_dig -3
 frame_dig 1
 callsub transferASABase_13
+assert
 int 1
-return
+frame_bury 0
+retsub
 
 // configureVariables
 configureVariables_17:
@@ -790,14 +793,15 @@ frame_dig 3
 frame_dig -7
 frame_dig 1
 callsub transferASABase_13
+assert
 frame_dig 0
 frame_dig -10
 frame_dig 2
 frame_dig -7
 frame_dig 1
 callsub transferASA_14
-int 1
-return
+assert
+retsub
 
 // configureOracles
 configureOracles_18:
@@ -989,6 +993,7 @@ frame_dig -3
 frame_dig -2
 frame_dig -1
 callsub transferASA_14
+assert
 b transfer_21_l3
 transfer_21_l2:
 frame_dig -5
@@ -996,6 +1001,7 @@ frame_dig -4
 frame_dig -3
 frame_dig -1
 callsub transferAlgo_15
+assert
 transfer_21_l3:
 int 1
 return

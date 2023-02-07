@@ -14,6 +14,7 @@ import updateOraclePriceCreatePayload from "../src/multiSig/oracle/updateOracleP
 import msigAppendSignature from "../src/multiSig/msigAppendSignature";
 import IPricePair from "../src/interface/IPricePair";
 import mintStToken from "../src/basicSig/reserve/mintStToken";
+import burnStToken from "../src/basicSig/reserve/burnStToken";
 
 const tealFolder = "./onchain/build/";
 const algodServer = <string>process.env.algodServer ?? "http://localhost";
@@ -63,7 +64,7 @@ let addrFee = <string>process.env.addrFee;
 
 describe("mint burn tests", () => {
   it("test mint", async function () {
-    const claimAsset = 743; // CZK
+    const claimAsset = 1068; // CZK
     await optInToAsa(client, sender, claimAsset);
     const tx = await mintStToken({
       client,
@@ -79,7 +80,24 @@ describe("mint burn tests", () => {
       depositAmount: 100_000_000, // 100 USDc
       minimumToReceive: 1,
     });
-    console.log(`TX: ${tx}`);
+    console.log(`TX Mint: ${tx}`);
     expect(tx).toBeDefined();
+
+    const txBurn = await burnStToken({
+      client,
+      sender,
+      reserveAppId,
+      addrFee,
+      oracleECB: oracleECBAppId,
+      oracleAMM1W: oracleAMMVWAP1W,
+      oracleAMM1H: oracleAMMVWAP1H,
+      tokensApp: tokensAppId,
+      depositAsset: claimAsset, // CZK
+      claimAsset: assetOracleBase, // USDc
+      depositAmount: 2_000_000_000, // 2000 CZK (Fx rate is 22)
+      minimumToReceive: 1,
+    });
+    console.log(`TX Burn: ${txBurn}`);
+    expect(txBurn).toBeDefined();
   });
 });

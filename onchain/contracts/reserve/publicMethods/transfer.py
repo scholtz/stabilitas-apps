@@ -23,8 +23,8 @@ def transfer(
           sender.address() == App.globalGet(constants.c_global_address_protocol_fees_holder))),
 
       If(asset.asset_id() == Int(0),
-        transfers.transferAlgo(amount, sender, receiver, note),
-        transfers.transferASA(amount, sender, receiver, asset, note),
+        Assert(transfers.transferAlgo(amount, sender, receiver, note)),
+        Assert(transfers.transferASA(amount, sender, receiver, asset, note)),
       ),
       Approve()
     )

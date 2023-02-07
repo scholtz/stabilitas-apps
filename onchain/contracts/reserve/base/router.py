@@ -2,7 +2,7 @@ from pyteal import *
 import base.utils
 
 router = Router(
-    name="ImpernamentLossFP",
+    name="StabilitasReserve",
     bare_calls=BareCallActions(
         # Allow this app to be created with a no-op call
         no_op=OnCompleteAction(action=Approve(), call_config=CallConfig.CREATE),

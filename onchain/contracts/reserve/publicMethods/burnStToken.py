@@ -9,7 +9,7 @@ import base.constants as constants
 @router.router.method
 def burnStToken(
     depositToReserve: abi.Transaction, 
-    addFee: abi.Account,
+    addrFee: abi.Account,
     #lpHolderAccount: abi.Address,
     oracleECB: abi.Application, 
     oracleAMM1W: abi.Application,
@@ -55,7 +55,7 @@ def burnStToken(
         claimedReserveAmount.set(calculation.stableFromDepositOfStToken(stAsset,depositStTokenAmount, oracleECB, oracleAMM1W, oracleAMM1H)),
         # depositAsset: abi.Asset, 
         # depositAmount: abi.Uint64, 
-        Assert(transfers.transferProtocolFeeToFeeAccount(addFee, claimAsset, claimedReserveAmount)),
+        Assert(transfers.transferProtocolFeeToFeeAccount(addrFee, claimAsset, claimedReserveAmount)),
         # tokensApp: abi.Application, 
         # lpHolderAccount: abi.Address, 
         # depositAsset: abi.Asset, 
@@ -70,7 +70,7 @@ def burnStToken(
         
         # depositAsset: abi.Asset, 
         # depositAmount: abi.Uint64, 
-        Assert(transfers.transferExitFeeToFeeAccount(claimAsset, claimedReserveAmount)),
+        Assert(transfers.transferExitFeeToFeeAccount(addrFee, claimAsset, claimedReserveAmount)),
 
         # claimAsset: abi.Asset, 
         # depositAmount: abi.Uint64,

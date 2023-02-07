@@ -4,6 +4,15 @@ Stabilitas is a stablecoin project built on the Algorand blockchain. Stablecoins
 
 Stabilitas aims to achieve stability by using a combination of smart contracts, algorithmic central bank-like management, and over-collateralization to maintain the value of the stablecoin. The project is built on the Algorand blockchain, which provides fast and secure transactions and smart contracts.
 
+## Greenhouse Hack #3
+
+This project has been fully created and Proof of concept developed at greenhouse hack 3 with bounty BYOP. 
+
+Project web lauched at: https://stabilitas.finance/
+
+Repos: https://github.com/scholtz/stabilitas-apps/
+Repos: https://github.com/scholtz/stabilitas-web/
+
 ## Description
 
 The goal of blockchain technologies is to allow the efficient exchange of value. Blockchain technology allows the issuance of tokens which represent real world assets.

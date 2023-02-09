@@ -13,6 +13,22 @@ Project web lauched at: https://stabilitas.finance/
 - [Smart contracts - Pyteal,Teal,Typescript](https://github.com/scholtz/stabilitas-apps/)
 - [Presentation web - Vue.JS](https://github.com/scholtz/stabilitas-web/)
 
+### Folder structure
+
+- [abi/stabilitas](https://github.com/scholtz/stabilitas-apps/tree/master/abi/stabilitas) - The ABI interface. Person can use it to connect his smart contract or see the swagger type docs at the dApp flow.
+- [arc0003](https://github.com/scholtz/stabilitas-apps/tree/master/arc0003) - Arc 0003 token definitions, IPFS links
+- [icons](https://github.com/scholtz/stabilitas-apps/tree/master/icons) - All Stabilitas tokens icons
+- [onchain/build](https://github.com/scholtz/stabilitas-apps/tree/master/onchain/build) - The built TEAL code
+- [onchain/contracts/tokens](https://github.com/scholtz/stabilitas-apps/tree/master/onchain/contracts/tokens) - The smart contract which holds the reserves of stabilitas tokens. Person can get from this contract the token id from the iso currency code.
+- [onchain/contracts/reserve](https://github.com/scholtz/stabilitas-apps/tree/master/onchain/contracts/reserve) - The smart contract which holds USDc reserves deposited by minting (PyTEAL structured in folders)
+- [src/interface](https://github.com/scholtz/stabilitas-apps/tree/master/src/interface) - Interfaces for TypeScript apps
+- [src/txs](https://github.com/scholtz/stabilitas-apps/tree/master/src/txs) - TypeScript methods for getting native interaction with smart contracts
+- [src/basicSig](https://github.com/scholtz/stabilitas-apps/tree/master/src/basicSig) - TypeScript methods for interaction with smart contract using the basic account
+- [src/stabilitas](https://github.com/scholtz/stabilitas-apps/tree/master/src/stabilitas) - Helper functions for stabilitas deployment, working with ECB, ...
+- [tests](https://github.com/scholtz/stabilitas-apps/tree/master/tests) - High test coverage
+- [tests](https://github.com/scholtz/stabilitas-apps/tree/master/tests) - High test coverage using Jest
+- [RootFolder](https://github.com/scholtz/stabilitas-apps) - Root folder contains bash scripts to run the oracle 24/7 and deployment helper scripts
+
 ## Description
 
 The goal of blockchain technologies is to allow the efficient exchange of value. Blockchain technology allows the issuance of tokens which represent real world assets.

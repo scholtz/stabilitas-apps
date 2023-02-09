@@ -25,7 +25,6 @@ Project web lauched at: https://stabilitas.finance/
 - [src/txs](https://github.com/scholtz/stabilitas-apps/tree/master/src/txs) - TypeScript methods for getting native interaction with smart contracts
 - [src/basicSig](https://github.com/scholtz/stabilitas-apps/tree/master/src/basicSig) - TypeScript methods for interaction with smart contract using the basic account
 - [src/stabilitas](https://github.com/scholtz/stabilitas-apps/tree/master/src/stabilitas) - Helper functions for stabilitas deployment, working with ECB, ...
-- [tests](https://github.com/scholtz/stabilitas-apps/tree/master/tests) - High test coverage
 - [tests](https://github.com/scholtz/stabilitas-apps/tree/master/tests) - High test coverage using Jest
 - [RootFolder](https://github.com/scholtz/stabilitas-apps) - Root folder contains bash scripts to run the oracle 24/7 and deployment helper scripts
 

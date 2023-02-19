@@ -6,12 +6,31 @@ Stabilitas aims to achieve stability by using a combination of smart contracts, 
 
 ## Greenhouse Hack #3
 
-This project has been fully created and Proof of concept developed at greenhouse hack 3 with bounty BYOP. 
+This project has been fully created and Proof of concept developed at greenhouse hack 3 with bounty BYOP.
 
 Project web lauched at: https://stabilitas.finance/
 
 - [Smart contracts - Pyteal,Teal,Typescript](https://github.com/scholtz/stabilitas-apps/)
 - [Presentation web - Vue.JS](https://github.com/scholtz/stabilitas-web/)
+
+## PoC to MVP
+
+PoC showed that the distribution of stable national currencies tokens can be done using multiple oracles within the smart contract. Smart contract locks USDc and releases the tokens according to the oracle prices and the state of the oracles and configuration of weights.
+
+MVP for testnet will require:
+
+- Time weighted VWAP oracles implementation (Done on Feb19)
+- Automatic amm liqidity increase on lp fees
+- Smart contracts final checks
+- Web deposit
+- Web withdraw
+- Web amm swap
+- Web page for each issued currency
+- Web to check sum of all tokens owned by third party
+
+MVP for mainnet will require:
+
+- Legal compliance
 
 ### Folder structure
 

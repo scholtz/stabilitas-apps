@@ -23,13 +23,13 @@ const app = async () => {
   });
 
   const indexerToken =
-    <string>process.env.algodToken ?? "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-  const indexerServer = <string>process.env.algodServer ?? "http://localhost";
-  const indexerPort = <string>process.env.algodPort ?? 8980;
+    <string>process.env.indexerToken ?? "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const indexerServer = <string>process.env.indexerServer ?? "http://localhost";
+  const indexerPort = parseInt(<string>process.env.indexerPort ?? "8980");
   const indexer = new algosdk.Indexer(indexerToken, indexerServer, indexerPort);
 
   const algodServer = <string>process.env.algodServer ?? "http://localhost";
-  const algodPort = <string>process.env.algodPort ?? 4001;
+  const algodPort = parseInt(<string>process.env.algodPort ?? "4001");
   const algodToken =
     <string>process.env.algodToken ?? "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
   let client = new algosdk.Algodv2(algodToken, algodServer, algodPort);

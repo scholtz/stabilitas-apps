@@ -520,7 +520,7 @@ retsub
 
 // transferExitFeeToFeeAccount
 transferExitFeeToFeeAccount_10:
-proto 2 1
+proto 3 1
 int 0
 frame_dig -1
 callsub exitFee_3
@@ -533,8 +533,8 @@ txnas Assets
 itxn_field XferAsset
 frame_dig 0
 itxn_field AssetAmount
-byte "af"
-app_global_get
+frame_dig -3
+txnas Accounts
 itxn_field AssetReceiver
 int 0
 itxn_field Fee
@@ -954,6 +954,7 @@ frame_dig -3
 frame_dig 0
 callsub transferProtocolFeeToFeeAccount_9
 assert
+frame_dig -8
 frame_dig -3
 frame_dig 0
 callsub transferExitFeeToFeeAccount_10

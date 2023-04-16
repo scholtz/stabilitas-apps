@@ -1,5 +1,5 @@
 {
-    "name": "ImpernamentLossFP",
+    "name": "StabilitasReserve",
     "methods": [
         {
             "name": "configureVariables",
@@ -166,7 +166,7 @@
                 },
                 {
                     "type": "account",
-                    "name": "addFee"
+                    "name": "addrFee"
                 },
                 {
                     "type": "application",

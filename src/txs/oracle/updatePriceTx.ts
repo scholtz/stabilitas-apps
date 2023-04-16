@@ -12,7 +12,8 @@ const updatePriceTx = (inputData: IInput): algosdk.Transaction => {
   const { params, from, prices, oracleFeedAppId } = inputData;
 
   let data = new Uint8Array();
-  for (var price of prices) {
+  // TODO .. increase limit 10 to higher number by adding more txs to the group to increase opcode costs
+  for (var price of prices.slice(0, 10)) {
     data = new Uint8Array([
       ...data,
       ...algosdk.bigIntToBytes(price.asset, 8),

@@ -4,6 +4,19 @@ Stabilitas is a stablecoin project built on the Algorand blockchain. Stablecoins
 
 Stabilitas aims to achieve stability by using a combination of smart contracts, algorithmic central bank-like management, and over-collateralization to maintain the value of the stablecoin. The project is built on the Algorand blockchain, which provides fast and secure transactions and smart contracts.
 
+## Mega Ace Hackathon
+
+For Mega Ace Hackathon we have deployed the application to testnet and built docker image for oracle usage. We have also created the AMM time weighted VWAP oracle price feed for national currencies.
+
+https://hub.docker.com/r/scholtz2/stabilitas/tags
+
+tokensAppId=194446915
+assetOracleBase=37074699
+oracleECBAppId=194448390
+oracleAMMVWAP1W=194448649
+oracleAMMVWAP1H=194448614
+reserveAppId=194449294
+
 ## Greenhouse Hack #3
 
 This project has been fully created and Proof of concept developed at greenhouse hack 3 with bounty BYOP.
@@ -224,3 +237,80 @@ store oracleECBAppId to the oracleAMMVWAP1W and oracleAMMVWAP1H env vars and rel
 ```
 
 store reserveAppId and addrFee env vars and reload env vars
+
+6. Run the oracle
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stabilitas
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stabilitas-ecb-oracle-job
+  namespace: stabilitas
+spec:
+  schedule: "5 * * * *"
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      parallelism: 1
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: stabilitas-ecb-oracle
+              image: scholtz2/stabilitas:1.0.0-beta
+              imagePullPolicy: Always
+              env:
+              - name: mnemonic
+                value: ""
+              - name: mnSig1
+                value: ""
+              - name: mnSig2
+                value: ""
+              - name: algodToken
+                value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              - name: algodServer
+                value: "https://testnet-api.algonode.cloud"
+              - name: algodPort
+                value: "443"
+              - name: indexerToken
+                value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              - name: indexerServer
+                value: "https://testnet-idx.algonode.cloud"
+              - name: indexerPort
+                value: "443"
+              - name: msig
+                value: "STABLET3PEX5NAXQ22A2YDKG3FBPWB6FC5KVJ57VH74GXIX5CMIRH4ONNY"
+              - name: clawback
+                value: "STABLECOCG2W3ZB2QDXOOFTMI2TAG43MZE5UWT2IZ2IQPNUCT4I26YD2HE"
+              - name: freeze
+                value: "STABLEYQKRPOL4DQVSKTTN5APHQPA3WXEJU4M36C2E46BS34A2Q3TCGT4U"
+              - name: tokensAppId
+                value: "194446915"
+              - name: assetOracleBase
+                value: "37074699"
+              - name: oracleECBAppId
+                value: "194448390"
+              - name: oracleAMMVWAP1W
+                value: "194448649"
+              - name: oracleAMMVWAP1H
+                value: "194448614"
+              - name: reserveAppId
+                value: "194449294"
+              - name: runSingleTime
+                value: "1"
+              volumeMounts:
+                - name: stabilitas-ecb-oracle-conf
+                  mountPath: /app/.config
+          volumes:
+            - name: stabilitas-ecb-oracle-conf
+              configMap:
+                name: stabilitas-ecb-oracle-conf
+```

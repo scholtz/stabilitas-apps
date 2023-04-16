@@ -39,12 +39,14 @@ const app = async () => {
   const mnSig2: string = <string>process.env.mnSig2 ?? "";
   const msigSig2 = algosdk.mnemonicToSecretKey(mnSig2);
 
+  const runSingleTime = parseInt(<string>process.env.runSingleTime ?? "");
+
   var msigConfig: algosdk.MultisigMetadata = {
     addrs: [msigSig1.addr, msigSig2.addr].sort(),
     threshold: 2,
     version: 1,
   };
-  const msigAccount = algosdk.multisigAddress(msigConfig);
+  const msigAccount = <string>process.env.msig ?? algosdk.multisigAddress(msigConfig);
 
   var config: IConfiguration = ConfigJson;
   let last = new Date();
@@ -82,7 +84,9 @@ const app = async () => {
         console.log(`Submitted in tx: ${tx}`);
         lastJson = json;
       }
-
+      if (runSingleTime) {
+        working = false;
+      }
       last = new Date();
       firsRun = false;
     }
